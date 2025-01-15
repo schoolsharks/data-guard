@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <Stack
       width="100%"
-      height={`${window.innerHeight < 616 ? 616 : window.innerHeight}px`}
+      // height={`${window.innerHeight < 616 ? 616 : window.innerHeight}px`}
     >
       <Stack
         direction={"row"}
@@ -79,7 +79,7 @@ const Home = () => {
         </Typography>
         <Typography color={"#44799BA1"} fontSize={"14px"}>Game Inspired by: Digital Personal Data Protection Act, 2023.</Typography>
       </Stack>
-      <Stack position={"fixed"} bottom={"0"} width={"100%"} maxWidth={"900px"}>
+      <Stack width={"100%"} maxWidth={"900px"}>
         <Button
           onClick={handleGetStarted}
           variant="contained"
