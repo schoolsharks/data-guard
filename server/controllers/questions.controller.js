@@ -1,6 +1,6 @@
 import { Session } from '../models/session.model.js';
 import { User } from '../models/user.model.js';
-import { goalTarget, questions } from '../utils/data/questions.js';
+import { questions } from '../utils/data/questions.js';
 import jwt from 'jsonwebtoken';
 
 import mongoose from 'mongoose';
@@ -36,6 +36,7 @@ export const handleGetQuestion = async (req, res) => {
 
     if (quesId) {
       const responseExists = user.responses.some(r => r.quesId === quesId);
+      console.log("Existing Resposne",responseExists)
       if (!responseExists) {
         updatedUser = await updateUserResponses(user._id, quesId, response);
       }
@@ -48,27 +49,10 @@ export const handleGetQuestion = async (req, res) => {
       nextQuesId = user.answered_count < sequence.length ? sequence[user.answered_count] : null;
     }
 
-    let goalReachPercentage;
-
-    if (updatedUser.answered_count === questions.length) {
-      const result = await User.aggregate([
-        { $match: { session: user.session } },
-        {
-          $group: {
-            _id: null,
-            totalUsers: { $sum: 1 },
-            wealthyUsers: { $sum: { $cond: [{ $gt: [{ $add: ['$wealth', '$investment'] }, goalTarget] }, 1, 0] } }
-          }
-        },
-        { $project: { percentage: { $multiply: [{ $divide: ['$wealthyUsers', '$totalUsers'] }, 100] } } }
-      ]);
-      goalReachPercentage = result.length ? result[0].percentage : 0;
-    }
-
 
     if (nextQuesId) {
       const nextQuestion = questions.find(q => q.id === nextQuesId);
-      const session = await Session.findById(user.session).select("totalPlayers")
+      console.log(nextQuestion.question)
       res.status(200).json({
         nextQ: nextQuestion.question,
         nextOptions: {
@@ -76,18 +60,13 @@ export const handleGetQuestion = async (req, res) => {
           B: nextQuestion.options['B'].content
         },
         nextQuesId: nextQuestion.id,
-        year: nextQuestion.year,
-        goalReachPercentage: goalReachPercentage,
-        wealth: updatedUser ? updatedUser.wealth : user.wealth,
-        investment: updatedUser ? updatedUser.investment : user.investment,
-        totalPlayers: session.totalPlayers,
+        turnover:updatedUser.turnover,
         answered: updatedUser ? updatedUser.answered_count : user.answered_count,
       });
+
     } else {
       res.status(200).json({ message: 'You have answered all the questions' });
     }
-
-
   } catch (error) {
     console.error('Error fetching question:', error);
     if (!res.headersSent) {
@@ -121,14 +100,15 @@ const updateUserResponses = async (userId, quesId, response) => {
       const option = question.options[response];
 
 
-      userDoc.wealth += option.wealth;
-      userDoc.investment += option.investment;
-      userDoc.answered_count += 1;
-
-
+      userDoc.businessGrowth += (option.businessGrowth * userDoc.turnover)
+      userDoc.finePaid += (option.fine * userDoc.turnover)
+      userDoc.longTermImpact += (option.longTermImpact * userDoc.turnover)
+      userDoc.turnover += (option.netImpact * userDoc.turnover)
+      
       const totalResponseTime = (Date.now() - userDoc.createdAt) / 1000;
       userDoc.avgResponseTime = totalResponseTime / userDoc.answered_count;
-
+      userDoc.answered_count+=1
+      
       userDoc.version += 1;
 
       await userDoc.save({ session });

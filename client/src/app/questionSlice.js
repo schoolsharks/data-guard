@@ -7,7 +7,7 @@ export const fetchNextQuestion = createAsyncThunk(
   'questions/fetchNextQuestion',
   async ({ userId, sq, response, quesId ,navigate}, thunkAPI) => {
     const Apiresponse = await axios.post(`${import.meta.env.VITE_SERVER_URL}/users/ques`, { id: userId, sq, response, quesId });
-    thunkAPI.dispatch(setUser({investment:Apiresponse.data.investment,wealth:Apiresponse.data.wealth,answered:Apiresponse.data.answered}))
+    thunkAPI.dispatch(setUser({turnover:Apiresponse.data.turnover,answered:Apiresponse.data.answered}))
     if (Apiresponse?.data?.message?.includes("You have answered")) {
       navigate('/completed');
     }

@@ -4,34 +4,35 @@ import axios from "axios";
 const initialState = {
   user: null,
   name: null,
-  email:null,
+  email: null,
+  company: null,
   session: null,
+  totalPlayers: 0,
+  connectionRequested: false,
+  turnover: null,
+  businessGrowth: null,
+  finePaid: null,
+  personalityInfo: null,
   sq: null,
-  investment: 0,
-  wealth: 0,
-  // happiness: 0,
-  // ranking: 0,
   answered: 0,
   error: null,
   status: 'idle',
-  totalPlayers: 0,
-  goalReachPercentage:0,
-  connectionRequested: false
 };
 
 export const createUser = createAsyncThunk(
   "user/create",
-  async ({ username, email, phoneNumber }, { rejectWithValue }) => {
+  async ({ name, email, phone, company }, { rejectWithValue }) => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/users/create`, {
-        name: username,
+        name,
         email,
-        phone: phoneNumber,
+        phone,
+        company
       });
-      const { user, session, sq ,totalPlayers} = response.data;
+      const { user, session, sq, totalPlayers } = response.data;
       localStorage.setItem("user", user)
       localStorage.setItem("session", session)
-      return { user, session, sq, username,totalPlayers };
+      return { user, session, sq, name, totalPlayers };
     } catch (error) {
       if (error.response && error.response.data) {
         return rejectWithValue(error.response.data.message);
@@ -44,10 +45,10 @@ export const createUser = createAsyncThunk(
 
 export const sendConnectionRequest = createAsyncThunk(
   "user/connectionRequest",
-  async ({ userId,email }, { rejectWithValue }) => {
+  async ({ userId, email }, { rejectWithValue }) => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/users/connectionRequest`, {
-        userId,email
+        userId, email
       })
       if (response.data.success) {
         return { success: true }
@@ -69,32 +70,36 @@ const usersSlice = createSlice({
       state.error = action.payload;
     },
     setUser: (state, action) => {
+
       state.user = action.payload?.user ?? state.user;
       state.session = action.payload?.session ?? state.session;
       state.name = action.payload?.name ?? state.name;
+      state.company = action.payload?.company ?? state.company;
       state.sq = action.payload?.sq ?? state.sq;
-      state.email=action.payload?.email??state.email;
-      state.investment = action.payload?.investment ?? state.investment;
-      state.wealth = action.payload?.wealth ?? state.wealth;
-      state.goalReachPercentage=action.payload?.goalReachPercentage ?? state.goalReachPercentage
-      // state.happiness = action.payload?.happiness ?? state.happiness;
+      state.turnover = action.payload.turnover ?? state.turnover
+      state.businessGrowth = action.payload.businessGrowth ?? state.businessGrowth
+      state.finePaid = action.payload.finePaid ?? state.finePaid
+      state.personalityInfo = action.payload.personalityInfo ?? state.personalityInfo
+      state.email = action.payload?.email ?? state.email;
       state.answered = action.payload?.answered ?? state.answered;
       state.totalPlayers = action.payload?.totalPlayers ?? state.totalPlayers
-      // state.ranking = action.payload?.ranking ?? state.ranking
-      state.connectionRequested=action.payload?.connectionRequested??state.connectionRequested
+      state.connectionRequested = action.payload?.connectionRequested ?? state.connectionRequested
     },
-    resetState:(state)=>{
-      state.user =null;
-      state.session =null;
-      state.name =null;
-      state.sq =null;
-      state.email=null;
-      state.investment =null;
-      state.wealth =null;
-      state.goalReachPercentage=null;
-      state.answered =null;
-      state.totalPlayers =null;
-      state.status="idle"
+    resetState: (state) => {
+      state.user =null
+      state.session =null
+      state.name =null
+      state.company =null
+      state.sq =null
+      state.turnover =null
+      state.businessGrowth =null
+      state.finePaid =null
+      state.personalityInfo =null
+      state.email =null
+      state.answered =null
+      state.totalPlayers =null
+      state.connectionRequested = null
+      state.status = "idle"
     }
   },
   extraReducers: (builder) => {
@@ -109,7 +114,6 @@ const usersSlice = createSlice({
         state.session = action.payload?.session;
         state.sq = action.payload?.sq;
         state.name = action.payload?.username;
-        state.totalPlayers=action.payload?.totalPlayers;
         state.error = null;
 
       })
@@ -117,23 +121,23 @@ const usersSlice = createSlice({
         state.status = 'failed';
         state.error = action.payload;
       })
-      // .addCase(sendConnectionRequest.pending, (state) => {
-      //   state.status = 'loading';
-      //   state.error = null;
-      // })
-      // .addCase(sendConnectionRequest.fulfilled, (state, action) => {
-      //   if (action.payload?.success) {
-      //     state.connectionRequested= true
-      //   }
-      //   state.status="succeeded"
-      // })
-      // .addCase(sendConnectionRequest.rejected, (state, action) => {
-      //   state.status = 'failed';
-      //   state.error = action.payload?;
-      // });
+    // .addCase(sendConnectionRequest.pending, (state) => {
+    //   state.status = 'loading';
+    //   state.error = null;
+    // })
+    // .addCase(sendConnectionRequest.fulfilled, (state, action) => {
+    //   if (action.payload?.success) {
+    //     state.connectionRequested= true
+    //   }
+    //   state.status="succeeded"
+    // })
+    // .addCase(sendConnectionRequest.rejected, (state, action) => {
+    //   state.status = 'failed';
+    //   state.error = action.payload?;
+    // });
   },
 });
 
-export const { setError, setUser ,resetState} = usersSlice.actions;
+export const { setError, setUser, resetState } = usersSlice.actions;
 
 export default usersSlice.reducer;

@@ -34,10 +34,10 @@ const Question = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { currentQuestion, status, options, quesId, year } = useSelector(
+  const { currentQuestion, status, options, quesId, } = useSelector(
     (state) => state.question
   );
-  const { user, sq, wealth, investment, answered,totalPlayers } = useSelector(
+  const { user, sq, answered,turnover } = useSelector(
     (state) => state.user
   );
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
@@ -138,7 +138,7 @@ const Question = () => {
                     <Typography>(TURNOVER)</Typography>
                   </Stack>
                   <Typography fontSize={"1.9rem"} fontWeight={"700"}>
-                    {wealth}
+                    ₹{turnover.toFixed()}
                   </Typography>
 
                   {/* <Stack alignItems="center" flex={1}>
@@ -177,7 +177,7 @@ const Question = () => {
                 />
                 <Stack
                   justifyContent={"center"}
-                  height={"120px"}
+                  minHeight={"270px"}
                   margin="16px 4px"
                 >
                   <Typography
@@ -185,6 +185,7 @@ const Question = () => {
                     fontSize="1.3rem"
                     fontWeight="700"
                   >
+                    Make Your Choice <br/><br/>
                     {currentQuestion}
                   </Typography>
                 </Stack>
@@ -202,7 +203,7 @@ const Question = () => {
                     </>
                   )}
                 </Stack>
-                <Stack
+                {/* <Stack
                   alignItems="center"
                   position="relative"
                   margin="auto 0 48px"
@@ -244,7 +245,7 @@ const Question = () => {
                       </Button>
                     </Box>
                   </Stack>
-                </Stack>
+                </Stack> */}
               </Stack>
             </motion.div>
           )}

@@ -1,447 +1,505 @@
 
 
-export const goalTarget = 7500000
+export const INITIAL_AMOUNT = 500000
 
 export const questions = [
   {
     id: 1,
-    question: "Mira receives a gift of INR 10,000.",
-    year: 1,
+    question: "Your UX team designs a sign-up process with pre-ticked consent boxes for marketing emails. Conversion rates soar.",
     options: {
       A: {
-        content: "Go for Bank deposits",
-        wealth: 11600,
-        investment: 0
+        content: "Keep the design---it's effective.",
+        businessGrowth: 0.1,
+        fine: -0.15,
+        netImpact: -0.05,
+        longTermImpact: 0.0
       },
-      B: {
-        content: "Buy the latest tech gadget for her digital life.",
-        wealth: 600,
-        investment: 0
+      "B": {
+        content: "Change to opt-in boxes---extra step for consumer.",
+        businessGrowth: 0.05,
+        fine: 0.0,
+        netImpact: 0.05,
+        longTermImpact: 0.0
       }
     }
   },
   {
     id: 2,
-    question: "Mira can work part-time, earning INR 5,000 per month.",
-    year: 1,
+    question: "Your team starts collecting behavioural data like app usage times and spending patterns to improve personalization. This is covered in the privacy policy, but users aren't explicitly notified.",
     options: {
       A: {
-        content: "Save half and spend half",
-        wealth: 30000,
-        investment: 0
+        content: "Notify users and stick to explicit opt-ins.",
+        businessGrowth: 0.0,
+        fine: 0.0,
+        netImpact: 0.0,
+        longTermImpact: 0.05
       },
-      B: {
-        content: "Spend it on social activities and campus life.",
-        wealth: 0,
-        investment: 0
+      "B": {
+        content: "Proceed with default opt-ins.",
+        businessGrowth: 0.12,
+        fine: -0.25,
+        netImpact: -0.13,
+        longTermImpact: -0.1
       }
     }
   },
   {
     id: 3,
-    question: "A premium streaming service costs INR 500/month.",
-    year: 1,
+    question: "Your compliance officer warns that regulators are investigating your data retention practices, particularly expired user data held for future campaigns. At the same time, Riya, a loyal user, posts a viral tweet: 'My late spouse's financial data is still stored on FinPeak. I trusted them, and they let me down.'",
     options: {
       A: {
-        content: "Subscribe to the premium streaming plan.",
-        wealth: -6000,
-        investment: 0
+        content: "Delete all expired data immediately.",
+        businessGrowth: 0.0,
+        fine: 0.0,
+        netImpact: 0.0,
+        longTermImpact: 0.05
       },
-      B: {
-        content: "Stick to free content on YouTube.",
-        wealth: 0,
-        investment: 0
+      "B": {
+        content: "Retain data and anonymize it.",
+        businessGrowth: 0.1,
+        fine: -0.2,
+        netImpact: -0.1,
+        longTermImpact: -0.1
       }
     }
   },
   {
     id: 4,
-    question: "Mira wants to spend INR 15,000 on trendy outfits for social media posts.",
-    year: 1,
+    question: "Your AI system begins offering investment advice. Users find it engaging, but legal raises concerns about liability if advice leads to losses. Additionally, your marketing team launches an ad campaign using pseudonymized user data.",
     options: {
       A: {
-        content: "Go on a shopping spree to upgrade her wardrobe.",
-        wealth: -15000,
-        investment: 0
+        content: "Restrict AI to neutral insights and halt all campaigns.",
+        businessGrowth: -0.1,
+        fine: 0.0,
+        netImpact: -0.1,
+        longTermImpact: 0.05
       },
-      B: {
-        content: "Set a budget of INR 5000 and save the rest.",
-        wealth: -5000,
-        investment: 0
+      "B": {
+        content: "Proceed with AI advice and pseudonymized data campaigns",
+        businessGrowth: 0.2,
+        fine: -0.05,
+        netImpact: -0.15,
+        longTermImpact: -0.2
       }
     }
   },
   {
     id: 5,
-    question: "Friends are attending a music festival costing INR 7,500.",
-    year: 1,
+    question: "A trusted employee uses sensitive user data for a personal project. It's a one-time issue, they insist. Meanwhile, a trusted partner handling payments offers to use anonymized user data for targeted ads, promising massive profits.",
     options: {
       A: {
-        content: "Attend the festival and enjoy the experience.",
-        wealth: -7500,
-        investment: 6720
+        content: "Introduce strict monitoring protocols and set clear boundaries with vendors.",
+        businessGrowth: 0.0,
+        fine: -0.05,
+        netImpact: -0.05,
+        longTermImpact: -0.05
       },
-      B: {
-        content: "Skip the festival, go for a movie night instead",
-        wealth: 0,
-        investment: 6720
+      "B": {
+        content: "Trust your old partner. Give warning to your employee.",
+        businessGrowth: 0.1,
+        fine: -0.2,
+        netImpact: -0.1,
+        longTermImpact: -0.25
       }
     }
   },
   {
     id: 6,
-    question: "A stock market crash reduces Mira's portfolio by 30%.",
-    year: 5,
+    question: "Marketing proposes launching a loyalty program using user insights without informing them.It'll be a pleasant surprise.",
     options: {
       A: {
-        content: "Panic and withdraw the investments to avoid further loss.",
-        wealth: 41600,
-        investment: -6720
+        content: "Launch transparently---seek user consent, Potential 3 months delay.",
+        businessGrowth: 0.05,
+        fine: 0.0,
+        netImpact: 0.05,
+        longTermImpact: 0.1
       },
-      B: {
-        content: "Keep calm and stay invested, believing it will recover.",
-        wealth: 0,
-        investment: 41600
+      "B": {
+        content: "Skip consent---it's a surprise benefit.",
+        businessGrowth: 0.1,
+        fine: 0.0,
+        netImpact: 0.1,
+        longTermImpact: -0.2
       }
     }
   },
   {
     id: 7,
-    question: "25,000 Increment per month",
-    year: 5,
+    question: "Your IT team proposes moving sensitive data to overseas servers to save costs. However, thenew jurisdiction has weak privacy protections.",
     options: {
       A: {
-        content: "Put in the bank",
-        wealth: 318000,
-        investment: 0
+        content: "Keep data local---ensure compliance.",
+        businessGrowth: -0.1,
+        fine: 0.0,
+        netImpact: -0.1,
+        longTermImpact: 0.0
       },
-      B: {
-        content: "Invest 50% in mutual funds and rest is spend",
-        wealth: 0,
-        investment: 168000
+      "B": {
+        content: "Proceed---it's cost-effective.",
+        businessGrowth: 0.02,
+        fine: -0.2,
+        netImpact: -0.18,
+        longTermImpact: 0.0
       }
     }
   },
   {
     id: 8,
-    question: "Europe Trip INR 3,00,000 on the cards with friends, long awaited",
-    year: 6,
+    question: "Regulators announce a surprise audit of FinPeak's systems. Your team hasn't updated keyprocesses for months. Team recommends a last-minute scramble to fix issues.",
     options: {
       A: {
-        content: "Go on the vacation for the memories.",
-        wealth: -300000,
-        investment: 0
+        content: "Scramble to update systems.",
+        businessGrowth: 0.0,
+        fine: -0.05,
+        netImpact: -0.05,
+        longTermImpact: -0.05
       },
-      B: {
-        content: "For Later",
-        wealth: 0,
-        investment: 0
+      "B": {
+        content: "Take no action---hope the audit passes.",
+        businessGrowth: 0.0,
+        fine: -0.2,
+        netImpact: -0.2,
+        longTermImpact: 0.0
       }
     }
   },
   {
     id: 9,
-    question: "Mira considers buying gold as a secure investment.",
-    year: 6,
+    question: "Late Friday evening, your PR manager rushes in. 'A small breach---0.05% of user data. It'stiny, barely newsworthy. If we announce it, users might panic. Should we quietly patch it orgo public?'",
     options: {
       A: {
-        content: "Buy gold for INR100,000, as it's trendy for long-term savings.",
-        wealth: -100000,
-        investment: 0
+        content: "Inform users immediately---it's the right thing to do.",
+        businessGrowth: -0.075,
+        fine: 0.0,
+        netImpact: -0.075,
+        longTermImpact: 0.15
       },
-      B: {
-        content: "Investing in Tech stocks.",
-        wealth: -100000,
-        investment: 112000
+      "B": {
+        content: "Stay quiet---it's too minor to disclose.",
+        businessGrowth: 0.1,
+        fine: 0.0,
+        netImpact: 0.1,
+        longTermImpact: -0.2
       }
     }
   },
   {
     id: 10,
-    question: "Tempted by a flash sale for the latest phone model for INR 1,00,000.",
-    year: 6,
+    question: "A trusted vendor handling payments suffers a breach. Regulators and users demand answers,but the vendor insists it's 'not a big deal.' Your team looks to you for a decision.",
     options: {
       A: {
-        content: "Upgrade and enjoy",
-        wealth: -100000,
-        investment: 0
+        content: "Disclose the breach---it's your responsibility.",
+        businessGrowth: 0.05,
+        fine: 0.0,
+        netImpact: 0.05,
+        longTermImpact: -0.05
       },
-      B: {
-        content: "Push it for next year",
-        wealth: 0,
-        investment: 0
+      "B": {
+        content: "Stay silent---it's their problem.",
+        businessGrowth: 0.1,
+        fine: 0.2,
+        netImpact: 0.3,
+        longTermImpact: 0.05
       }
     }
   },
   {
     id: 11,
-    question: "Mira wins INR 1,00,000 in a contest.",
-    year: 6,
+    question: "Your marketing head proudly shows off a new newsletter design. 'The unsubscribe button isbarely visible---it'll keep our retention high!'",
     options: {
       A: {
-        content: "Splurge on a luxury item like a designer bag.",
-        wealth: 0,
-        investment: 15591
+        content: "Make the unsubscribe option clear and accessible.",
+        businessGrowth: 0.0,
+        fine: 0.0,
+        netImpact: 0.0,
+        longTermImpact: 0.03
       },
-      B: {
-        content: "Invest the money in a diversified mutual fund.",
-        wealth: 0,
-        investment: 59429
+      "B": {
+        content: "Keep the design---it's working.",
+        businessGrowth: 0.05,
+        fine: 0.0,
+        netImpact: 0.05,
+        longTermImpact: -0.05
       }
     }
   },
   {
     id: 12,
-    question: "Mira is offered stock options worth INR 5,00,000 at her startup job.",
-    year: 7,
+    question: "Your audit reveals FinPeak collects user vacation data with no business relevance. Marketinginsists it 'could be useful someday.'",
     options: {
       A: {
-        content: "Buy Stock options  @80% Discount and believe in the company's future.",
-        wealth: -100000,
-        investment: 0
+        content: "Stop collecting irrelevant data.",
+        businessGrowth: 0.0,
+        fine: 0.0,
+        netImpact: 0.0,
+        longTermImpact: 0.03
       },
-      B: {
-        content: "Give it a pass",
-        wealth: 0,
-        investment: 0
+      "B": {
+        content: "Keep collecting---you never know.",
+        businessGrowth: 0.03,
+        fine: 0.0,
+        netImpact: 0.03,
+        longTermImpact: 0.1
       }
     }
   },
   {
     id: 13,
-    question: "Mira receives INR 3,00,000 from a freelance contract.",
-    year: 7,
+    question: "Your CFO warns, 'Regulators flagged our outdated systems. If a breach happens, we'relooking at ₹250 crore in penalties. Fixing it now delays Q3 goals.'",
     options: {
       A: {
-        content: "Save the money for her long-term goals like a future business.",
-        wealth: 300000,
-        investment: 22682
+        content: "Upgrade systems immediately---safety first.",
+        businessGrowth: -0.1,
+        fine: 0.0,
+        netImpact: -0.1,
+        longTermImpact: 0.05
       },
-      B: {
-        content: "Spend it on a 15 day digital nomad trip.",
-        wealth: 0,
-        investment: 452270
+      "B": {
+        content: "Delay upgrades---focus on targets",
+        businessGrowth: 0.1,
+        fine: -0.15,
+        netImpact: -0.05,
+        longTermImpact: -0.2
       }
     }
   },
   {
     id: 14,
-    question: "Mira inherits INR 10,00,000 from a relative.",
-    year: 8,
+    question: "Our employees love using their personal devices,&quot; HR tells you. &quot;It boosts morale. But ITdisagrees: Without security protocols, we're a breach waiting to happen.",
     options: {
       A: {
-        content: "Invest in trending tech stocks.",
-        wealth: 0,
-        investment: 1250000
+        content: "Enforce security measures immediately.",
+        businessGrowth: 0.0,
+        fine: -0.05,
+        netImpact: -0.05,
+        longTermImpact: -0.05
       },
-      B: {
-        content: "Invest in mutual funds",
-        wealth: 0,
-        investment: 1465175
+      "B": {
+        content: "Allow flexibility---it's convenient for employees.",
+        businessGrowth: 0.05,
+        fine: 0.0,
+        netImpact: 0.05,
+        longTermImpact: -0.15
       }
     }
   },
-  // {
-  //   id: 15,
-  //   question: "A wedding expense arises, requiring Mira to spend INR 25,00,000.",
-  //   year: 8,
-  //   options: {
-  //     A: {
-  //       content: "Take a personal loan for 10 years  to cover the wedding costs.",
-  //       wealth: -2500000,
-  //       investment: 802096
-  //     },
-  //     B: {
-  //       content: "Withdraw from her investment portfolio.",
-  //       wealth: 0,
-  //       investment: -2308254
-  //     }
-  //   }
-  // },
   {
     id: 15,
-    question: "Mira has an opportunity for a job abroad with higher salary but higher cost of living.",
-    year: 9,
+    question: "An anonymous email claims: FinPeak is collecting user data without proper consent. Legaladvises brushing it off, but compliance urges an internal review.",
     options: {
       A: {
-        content: "Take the job and start saving 10% (20,000) more monthly.",
-        wealth: 240000,
-        investment: 305175
+        content: "Investigate the claims thoroughly---it's worth understanding.",
+        businessGrowth: 0.0,
+        fine: 0.0,
+        netImpact: 0.0,
+        longTermImpact: 0.05
       },
-      B: {
-        content: "Stay local, cut expenses, and save aggressively.",
-        wealth: 60000,
-        investment: 0
+      "B": {
+        content: "Ignore the complaint---it's not credible.",
+        businessGrowth: 0.0,
+        fine: 0.0,
+        netImpact: 0.0,
+        longTermImpact: -0.1
       }
     }
   },
   {
     id: 16,
-    question: "Mira can upgrade to a car for INR 5,00,000.",
-    year: 9,
+    question: "\"Instant approval\"; reads the headline of your new loan campaign. But delays are common.\"It's a marketing hook,\"; your team defends.",
     options: {
       A: {
-        content: "Upgrade and enjoy",
-        wealth: -500000,
-        investment: 390624
+        content: "Adjust the campaign.",
+        businessGrowth: -0.05,
+        fine: 0.0,
+        netImpact: -0.05,
+        longTermImpact: 0.05
       },
-      B: {
-        content: "Save the money for family planning or future expenses.",
-        wealth: 0,
-        investment: 387058
+      "B": {
+        content: "Launch the campaign---it drives conversions.",
+        businessGrowth: 0.12,
+        fine: 0.0,
+        netImpact: 0.12,
+        longTermImpact: -0.2
       }
     }
   },
   {
     id: 17,
-    question: "A market boom increases Mira's stock portfolio value by 20%.",
-    year: 10,
+    question: "Regulators mandate a tech upgrade to improve user data protection. It'll cost a fortune,warns your CFO.",
     options: {
       A: {
-        content: "Keep the stocks (equity), hoping for more gains.",
-        wealth: 0,
-        investment: 732420
+        content: "Invest in the upgrade---it's mandatory.",
+        businessGrowth: -0.05,
+        fine: 0.0,
+        netImpact: -0.05,
+        longTermImpact: -0.05
       },
-      B: {
-        content: "Sell the stocks (equity) and secure the profits now.",
-        wealth: 0,
-        investment: 0
+      "B": {
+        content: "Delay the upgrade---it's costly.",
+        businessGrowth: 0.1,
+        fine: 0.0,
+        netImpact: 0.1,
+        longTermImpact: -0.15
       }
     }
   },
   {
     id: 18,
-    question: "Mira loses her job for 6 months.",
-    year: 11,
+    question: "Several users report unauthorized transactions on their accounts. Your fraud detection systemis outdated, and your tech team proposes an expensive upgrade.",
     options: {
       A: {
-        content: "Cut lifestyle expenses like streaming subscriptions and dining out.",
-        wealth: -800000,
-        investment: 195312
+        content: "Upgrade the system immediately---it's critical.",
+        businessGrowth: -0.2,
+        fine: 0.0,
+        netImpact: -0.2,
+        longTermImpact: 0.1
       },
-      B: {
-        content: "Use her emergency fund for everyday expenses.",
-        wealth: 0,
-        investment: 26882
+      "B": {
+        content: "Patch the system---it's cheaper.",
+        businessGrowth: -0.02,
+        fine: 0.0,
+        netImpact: -0.02,
+        longTermImpact: -0.2
       }
     }
   },
   {
     id: 19,
-    question: "Family expenses rise; Mira needs INR 6,00,000 for children's education.",
-    year: 12,
+    question: "A viral tweet accuses FinPeak of unauthorized charges. The investigation reveals user error,but public perception is turning against you. \"We should apologize,\"your PR team urges.\"But why apologize for their mistake?\" counters legal.",
     options: {
       A: {
-        content: "Take out an education loan.",
-        wealth: -600000,
-        investment: 964784
+        content: "Apologize and offer support---it's good PR",
+        businessGrowth: 0.0,
+        fine: 0.0,
+        netImpact: 0.0,
+        longTermImpact: 0.05
       },
-      B: {
-        content: "Withdraw from long-term investments.",
-        wealth: 0,
-        investment: -600000
+      "B": {
+        content: "Ignore the tweet---it's their mistake.",
+        businessGrowth: 0.0,
+        fine: 0.0,
+        netImpact: 0.0,
+        longTermImpact: -0.02
       }
     }
   },
   {
     id: 20,
-    question: "Large side hustle one off contract INR 5,00,000.",
-    year: 13,
+    question: "A well-known but controversial influencer offers to partner with FinPeak. \"They have amassive following,' your marketing team argues.",
     options: {
       A: {
-        content: "Invest fully in tech-focused mutual funds.",
-        wealth: 0,
-        investment: 1125392
+        content: "Reject the partnership---it's too risky.",
+        businessGrowth: 0.0,
+        fine: 0.0,
+        netImpact: 0.0,
+        longTermImpact: 0.05
       },
-      B: {
-        content: "Spend part of it on a lifestyle upgrade, like travel or a home makeover.",
-        wealth: 0,
-        investment: 0
+      "B": {
+        content: "Accept the partnership---it's great exposure.",
+        businessGrowth: 0.03,
+        fine: 0.0,
+        netImpact: 0.03,
+        longTermImpact: -0.25
       }
     }
   },
   {
     id: 21,
-    question: "Mira is close to achieving her goal of buying a house worth INR 1 crore.",
-    year: 13,
+    question: "Your HR team reports a breach: an employee's laptop was stolen, containing unencrypteduser data. \"This could destroy trust\" warns compliance. \"We need to act fast.\"",
     options: {
       A: {
-        content: "Make 20% Down Payment. For a 1Cr home loan",
-        wealth: -2000000,
-        investment: 1507470
+        content: "Launch a full investigation and upgrade security immediately.",
+        businessGrowth: 0.0,
+        fine: -0.02,
+        netImpact: -0.02,
+        longTermImpact: 0.05
       },
-      B: {
-        content: "Delay the house purchase and invest further in high-growth opportunities.",
-        wealth: 0,
-        investment: 771827
+      "B": {
+        content: "Handle it quietly---it's unlikely to surface.",
+        businessGrowth: 0.05,
+        fine: 0.0,
+        netImpact: 0.05,
+        longTermImpact: -0.03
       }
     }
   },
   {
     id: 22,
-    question: "The real estate market crashes by 15%.",
-    year: 14,
+    question: "A high-profile client's loan application is flagged for irregularities. \"Approving it couldsecure their loyalty\" says your sales lead. \"But rejection may protect us from future fallout\"warns compliance.",
     options: {
       A: {
-        content: "Stay Put",
-        wealth: 0,
-        investment: 1884340
+        content: "Reject the application---it's too risky.",
+        businessGrowth: -0.15,
+        fine: 0.0,
+        netImpact: -0.15,
+        longTermImpact: 0.05
       },
-      B: {
-        content: "Take advantage of the lower prices and buy immediately (Reduced Price of 75,00,00 Cash down) no loan",
-        wealth: -7500000,
-        investment: 0
+      "B": {
+        content: "Approve the loan---it's worth the risk.",
+        businessGrowth: 0.15,
+        fine: -0.12,
+        netImpact: 0.03,
+        longTermImpact: 0.0
       }
     }
   },
   {
     id: 23,
-    question: "Mira plans to start a side business requiring INR 2,00,000.",
-    year: 15,
+    question: "Your UX team designs a checkout flow with subtle \"dark patterns\" to increase upsells",
     options: {
       A: {
-        content: "Start the business and explore entrepreneurship.",
-        wealth: -200000,
-        investment: 0
+        content: "Reject dark pattern.",
+        businessGrowth: 0.0,
+        fine: 0.0,
+        netImpact: 0.0,
+        longTermImpact: 0.05
       },
-      B: {
-        content: "Stick to her full-time job and save more.",
-        wealth: 1200000,
-        investment: 1884340
+      "B": {
+        content: "Approve the design---it boosts revenue.",
+        businessGrowth: 0.07,
+        fine: -0.02,
+        netImpact: 0.05,
+        longTermImpact: -0.05
       }
     }
   },
   {
     id: 24,
-    question: "Mira can contribute INR 5,00,000 towards her sibling's wedding.",
-    year: 15,
+    question: "Your campus ambassadors are tasked with conducting surveys. They using G-Forms tocollect responses with an implied understanding that it carries explicit consent.",
     options: {
       A: {
-        content: "Contribute the full amount to family.",
-        wealth: -500000,
-        investment: 0
+        content: "Add a consent in 20+ languages at the beginning of the survey, clearly outlining how the data will be used and shared.",
+        businessGrowth: -0.01,
+        fine: 0.0,
+        netImpact: -0.01,
+        longTermImpact: 0.05
       },
-      B: {
-        content: "Contribute half and save the rest.",
-        wealth: -250000,
-        investment: 0
+      "B": {
+        content: "Allow ambassadors to continue conducting surveys as its done anonymously.",
+        businessGrowth: 0.0,
+        fine: 0.0,
+        netImpact: 0.0,
+        longTermImpact: -0.03
       }
     }
   },
   {
     id: 25,
-    question: "Mira receives a surprise bonus of INR 1,00,000 for excellent performance.",
-    year: 15,
+    question: "\"Users want their data transferred to a competitor,\" your tech team groans. \"It's costly andcomplex.\"",
     options: {
       A: {
-        content: "Invest the bonus in future tech.",
-        wealth: 0,
-        investment: 1205980
+        content: "Support portability---it's their right.",
+        businessGrowth: 0.0,
+        fine: 0.0,
+        netImpact: 0.0,
+        longTermImpact: 0.02
       },
-      B: {
-        content: "Bank deposit",
-        wealth: 0,
-        investment: 896827
+      "B": {
+        content: "Refuse---it's too complex.",
+        businessGrowth: 0.0,
+        fine: -0.15,
+        netImpact: -0.15,
+        longTermImpact: 0.0
       }
     }
   }

@@ -11,6 +11,10 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: Number,
   },
+  company:{
+    type:String,
+    default:"_"
+  },
   session: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Session',
@@ -39,17 +43,26 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
-  wealth: {
+  turnover: {
     type: Number,
     required: true,
     default: 0,
   },
-  investment: {
-    type: Number,
-    required: true,
-    default: 0,
+  businessGrowth:{
+    type:Number,
+    required:true,
+    default:0
   },
-
+  finePaid:{
+    type:Number,
+    required:true,
+    default:0
+  },
+  longTermImpact:{
+    type:Number,
+    required:true,
+    default:0
+  },
   avgResponseTime: {
     type: Number,
     default: 0,

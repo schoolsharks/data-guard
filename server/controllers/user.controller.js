@@ -1,17 +1,18 @@
 import { User } from '../models/user.model.js';
-import { goalTarget, questions } from '../utils/data/questions.js';
+import { INITIAL_AMOUNT, questions } from '../utils/data/questions.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { Admin } from '../models/admin.model.js';
 import signToken from '../utils/signJwt.js';
 import { Session } from '../models/session.model.js';
+import { getPersonalityInfo } from '../utils/data/getPersonalityInfo.js';
 
 dotenv.config();
 
 
 
 export const handleCreateUser = async (req, res) => {
-  const { name, email, phone } = req.body;
+  const { name, email, phone,company } = req.body;
 
   try {
     const admin = await Admin.findOne();
@@ -29,14 +30,15 @@ export const handleCreateUser = async (req, res) => {
     const shuffledQuestionIds = questions.map(q => q.id);
     const sq = jwt.sign({ sequence: shuffledQuestionIds }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
+    
     const newUser = new User({
       name,
       email,
+      company,
       session: admin.current_session,
       responses: [],
       answered_count: 0,
-      wealth: 10000,
-      investment: 500,
+      turnover:INITIAL_AMOUNT,
       sq: sq,
       phone: phone || null,
     });
@@ -80,35 +82,21 @@ export const handleGetUser = async (req, res) => {
     if (!userData.session || userData.session.toString() !== admin.current_session?.toString()) {
       return res.status(403).json({ success: false, message: `Session mismatch: ${userData.session} vs ${admin.current_session}` });
     }
-
-    let goalReachPercentage;
-
-    const result = await User.aggregate([
-      { $match: { session: userData.session } },
-      {
-        $group: {
-          _id: null,
-          totalUsers: { $sum: 1 },
-          wealthyUsers: { $sum: { $cond: [{ $gt: [{ $add: ['$wealth', '$investment'] }, goalTarget] }, 1, 0] } }
-        }
-      },
-      { $project: { percentage: { $multiply: [{ $divide: ['$wealthyUsers', '$totalUsers'] }, 100] } } }
-    ]);
-
-
-    goalReachPercentage = result.length ? result[0].percentage : 0;
+   
+    const isCompleted=userData.responses?.length===questions.length
 
     res.status(200).json({
       success: true,
       user: userData._id,
       name: userData.name,
       email: userData.email,
+      company:userData.company,
       session: userData.session,
       sq: userData.sq,
-      wealth: userData.wealth,
-      totalPlayers: session?.totalPlayers || 0,
-      investment: userData.investment,
-      goalReachPercentage: goalReachPercentage,
+      turnover:isCompleted ? userData.turnover + userData.longTermImpact : userData.turnover,
+      businessGrowth:isCompleted?userData.businessGrowth:undefined,
+      finePaid:isCompleted?userData.finePaid:undefined,
+      personalityInfo:isCompleted?getPersonalityInfo(userData.businessGrowth,userData.finePaid):undefined,
       answered: userData.answered_count,
       connected:userData.connected
     });

@@ -6,10 +6,10 @@ export const initializeAuth = async (navigate, dispatch) => {
     const { user, session } = useLocalStorage();
 
     if (!user || !session) {
-        if(window.location.pathname==="/login"){
+        if (window.location.pathname === "/login") {
             navigate("/login")
         }
-        else{
+        else {
             navigate("/home");
         }
         return;
@@ -22,19 +22,20 @@ export const initializeAuth = async (navigate, dispatch) => {
         if (response.data.success === false) {
             navigate("/login");
         } else {
-            const { user: user,name, email,session, sq, wealth, investment,answered,goalReachPercentage,connected} = response.data;
+            const { user, name, email, company, session, sq, turnover, businessGrowth, finePaid, personalityInfo, answered, connected, } = response.data;
             dispatch(setUser({
-                user: user,
-                name:name,
-                email:email,
-                session,
-                sq,
-                wealth,
+                user,
+                name,
+                email, 
+                company, 
+                session, 
+                sq, 
+                turnover, 
+                businessGrowth, 
+                finePaid, 
+                personalityInfo, 
                 answered,
-                investment,
-                goalReachPercentage,
-                // totalPlayers,
-                connectionRequested:connected
+                connectionRequested: connected
             }));
         }
     } catch (error) {

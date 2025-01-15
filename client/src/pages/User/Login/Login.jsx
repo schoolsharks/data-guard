@@ -22,6 +22,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
+  const [company, setCompany] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
@@ -39,11 +40,12 @@ const Login = () => {
 
   const handleSubmit = () => {
     setError("");
-    const response = loginValidation(email, name);
+    const response = loginValidation({email, name,company});
     if (!response.success) {
       setError(response.error);
     } else {
-      dispatch(createUser({ username: name, email, phone }));
+      console.log("Inside component ",phone)
+      dispatch(createUser({ name, email, phone,company }));
     }
   };
 
@@ -105,6 +107,17 @@ const Login = () => {
           onChange={(e) => {
             setError("");
             setName(e.target.value);
+          }}
+        />
+        <TextField
+          label="Company Name*"
+          type="text"
+          variant="standard"
+          placeholder="eg.xxxxxxxx"
+          value={company}
+          onChange={(e) => {
+            setError("");
+            setCompany(e.target.value);
           }}
         />
         <TextField
@@ -196,7 +209,7 @@ const Login = () => {
             boxShadow: "none",
           }}
         >
-          {tncAccepted?"Get Started":"Accept T&C to Continue"}
+          {tncAccepted ? "Get Started" : "Accept T&C to Continue"}
         </Button>
         {/* <SwipeBar onSwipe={handleSubmit} /> */}
       </Stack>
@@ -207,9 +220,9 @@ const Login = () => {
         }}
         PaperProps={{
           sx: {
-            bgcolor: "#00000024",
+            bgcolor: theme.palette.primary.main,
             backdropFilter: "blur(4px)",
-            borderRadius: "12px",
+            borderRadius: "24px",
             border: "2px solid #fff",
             overflowY: "scroll",
             "&::-webkit-scrollbar": {
@@ -237,43 +250,21 @@ export default Login;
 const TermsAndConditionsContent = () => {
   return (
     <>
-      <Typography fontSize={"1.5rem"} textAlign={"center"}>
+      <Typography fontSize={"1.5rem"} fontWeight={"800"} marginTop={"12px"} textAlign={"center"}>
         TERMS & CONDITIONS
       </Typography>
-      <Typography marginTop={"8px"}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores
-        corporis, aperiam blanditiis obcaecati suscipit dolorem perspiciatis
-        nisi consectetur, officiis vero iusto aliquam? Alias tempora odit rat
+      <Typography marginTop={"24px"} fontSize={"18px"}>
+        This game is designed for fun and educational purposes only!
       </Typography>
-      <Typography marginTop={"8px"}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores
-        corporis, aperiam blanditiis obcaecati suscipit dolorem perspiciatis
-        nisi consectetur, officiis vero iusto aliquam? Alias tempora odit rat
+      <Typography marginTop={"16px"} fontSize={"18px"}>
+        No real data will be collected, stored, or shared during the game.
       </Typography>
-      <Typography marginTop={"8px"}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores
-        corporis, aperiam blanditiis obcaecati suscipit dolorem perspiciatis
-        nisi consectetur, officiis vero iusto aliquam? Alias tempora odit rat
+      <Typography marginTop={"16px"} fontSize={"18px"}>
+        All inputs will be erased after the game concludes unless you explicitly
+        request to stay connected for follow-up discussions or insights.
       </Typography>
-      <Typography marginTop={"8px"}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores
-        corporis, aperiam blanditiis obcaecati suscipit dolorem perspiciatis
-        nisi consectetur, officiis vero iusto aliquam? Alias tempora odit rat
-      </Typography>
-      <Typography marginTop={"8px"}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores
-        corporis, aperiam blanditiis obcaecati suscipit dolorem perspiciatis
-        nisi consectetur, officiis vero iusto aliquam? Alias tempora odit rat
-      </Typography>
-      <Typography marginTop={"8px"}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores
-        corporis, aperiam blanditiis obcaecati suscipit dolorem perspiciatis
-        nisi consectetur, officiis vero iusto aliquam? Alias tempora odit rat
-      </Typography>
-      <Typography marginTop={"8px"}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores
-        corporis, aperiam blanditiis obcaecati suscipit dolorem perspiciatis
-        nisi consectetur, officiis vero iusto aliquam? Alias tempora odit rat
+      <Typography marginTop={"16px"} fontSize={"18px"}>
+        Enjoy the experience without any worries!
       </Typography>
     </>
   );

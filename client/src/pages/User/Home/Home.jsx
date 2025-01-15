@@ -1,9 +1,9 @@
 import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
 import React from "react";
 import background from "../../../assets/home-page-bg.webp";
-import SwipeBar from "../../../components/SwipeBar";
 import { useNavigate } from "react-router-dom";
-import zIndex from "@mui/material/styles/zIndex";
+import wgabLogo from "../../../assets/wgab-logo.webp";
+import anpPartnersLogo from "../../../assets/anp-partners-logo.webp";
 
 const Home = () => {
   const theme = useTheme();
@@ -15,8 +15,15 @@ const Home = () => {
     <Stack
       width="100%"
       height={`${window.innerHeight < 616 ? 616 : window.innerHeight}px`}
-      position="relative"
     >
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        padding={"16px 12px"}
+      >
+        <img src={anpPartnersLogo} alt="WGAB" style={{ width: "50px" }} />
+        <img src={wgabLogo} alt="A&P Partners" style={{ width: "70px" }} />
+      </Stack>
       <Typography
         variant={"h3"}
         fontSize="2.8rem"
@@ -25,58 +32,52 @@ const Home = () => {
         zIndex={1}
         maxWidth={"200px"}
         color={theme.palette.text.main}
-        margin={"120px auto 22px"}
+        margin={"32px auto 22px"}
         sx={{
           minWidth: "max-content",
           textShadow: "2px 2px 4px #fff",
         }}
       >
-        DATA GUARD
+        Risk It or Fix It
       </Typography>
       <Stack
         color={theme.palette.text.main}
-        margin={"auto 12px 180px"}
         gap={"16px"}
         position={"relative"}
-        padding={"8px"}
+        margin={"0px 12px"}
+        padding={"12px 16px"}
+        borderRadius={"24px"}
+        sx={{
+          background: "linear-gradient(180deg, #FFFFFF 0%, #A1C1D8 100%)",
+        }}
       >
-        <Box zIndex={"2"}>
-          <Typography
-            variant="body2"
-            fontWeight={"500"}
-            fontSize={"1rem"}
-            margin={"0 0 12px"}
-          >
-            You are a CEO of "Sniff & Tail," a unique startup that creates
-            personalized perfumes for pets.
-          </Typography>
-          <Typography variant="body2" fontWeight={"500"} fontSize={"1rem"}>
-            The goal is to navigate through business and ethical dilemmas,
-            aiming to grow both financial resources and customer loyalty in
-            shortest possible time.
-          </Typography>
-          <Typography variant="body2" fontWeight={"500"} fontSize={"1rem"}>
-            Play to:
-            <br />
-            Maximise Wealth
-            <br />
-            Maximise Customer Happiness
-            <br />
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            top: "0",
-            left: "0",
-            bgcolor: "#ffffff",
-            zIndex: "1",
-            filter: "blur(10px)",
-            opacity: "0.5",
-          }}
-        />
+        <Typography
+          variant="body2"
+          fontWeight={"600"}
+          fontSize={"1.25rem"}
+          margin={"0 0 12px"}
+        >
+          Welcome to <b>FinPeak!</b>
+          <br />
+          Congratulations! You’ve just been appointed CEO for a day at FinPeak,
+          the fintech company everyone’s talking about.
+          <br />
+          <br />
+          Starting with a budget of <b>₹500,000</b>, you’ll face a series of
+          critical decisions. Each choice will test your ability to:
+          <br />
+          1. Balance profits with ethics.
+          <br />
+          2. Avoid regulatory pitfalls.
+          <br />
+          3. Build long-term user loyalty.
+          <br />
+          <br />
+          Every choice matters.<br/>
+          You’ll have just <b>30 seconds</b> to make each
+          decision.
+        </Typography>
+        <Typography color={"#44799BA1"} fontSize={"14px"}>Game Inspired by: Digital Personal Data Protection Act, 2023.</Typography>
       </Stack>
       <Stack position={"fixed"} bottom={"0"} width={"100%"} maxWidth={"900px"}>
         <Button
@@ -87,7 +88,7 @@ const Home = () => {
             textTransform: "none",
             padding: "16px",
             borderRadius: "24px",
-            margin: "28px",
+            margin: "12px 28px",
             boxShadow: "none",
           }}
         >
@@ -95,20 +96,6 @@ const Home = () => {
         </Button>
         {/* <SwipeBar onSwipe={handleOnSwipe} /> */}
       </Stack>
-      <Box
-        component={"img"}
-        src={background}
-        alt=""
-        sx={{
-          width: "100%",
-          height: "100%",
-          position: "absolute",
-          zIndex: "-1",
-          opacity: "0.55",
-          objectFit:"contain",
-          objectPosition:"100% 100%"
-        }}
-      />
     </Stack>
   );
 };

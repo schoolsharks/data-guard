@@ -105,7 +105,7 @@ const OptionB = ({ text, onOptionSelect }) => {
       position={"absolute"}
       left="8px"
       width={"100%"}
-      top={"130px"}
+      top={"142px"}
       maxWidth={"900px"}
       gap={"12px"}
       justifyContent={"flex-start"}
