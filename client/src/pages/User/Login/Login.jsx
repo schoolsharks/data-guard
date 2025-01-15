@@ -78,7 +78,7 @@ const Login = () => {
     <Stack
       className="user-login"
       width="100%"
-      height={`${window.innerHeight < 616 ? 616 : window.innerHeight}px`}
+      // height={`${window.innerHeight < 616 ? 616 : window.innerHeight}px`}
       position="relative"
       alignItems={"center"}
     >
@@ -191,8 +191,9 @@ const Login = () => {
         </Button>
       </Stack>
       <Stack
-        position={"fixed"}
-        bottom={"1.5rem"}
+        // position={"fixed"}
+
+        // bottom={"1.5rem"}
         width={"100%"}
         maxWidth={"900px"}
       >
