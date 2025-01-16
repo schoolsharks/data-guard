@@ -207,7 +207,7 @@ const Login = () => {
             textTransform: "none",
             padding: "16px",
             borderRadius: "24px",
-            margin: "28px",
+            margin: "28px 12px 12px",
             boxShadow: "none",
           }}
         >

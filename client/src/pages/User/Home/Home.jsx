@@ -34,10 +34,10 @@ const Home = () => {
         <img src={wgabLogo} alt="A&P Partners" style={{ width: "70px" }} />
       </Stack>
 
-      <Stack alignItems={"center"} margin={"0 auto 12px"}>
-        <img src={riskItLogo} alt="" style={{ width: "90px" }} />
+      <Stack alignItems={"center"} margin={"auto auto 12px"}>
+        {/* <img src={riskItLogo} alt="" style={{ width: "90px" }} /> */}
         <Typography
-          fontSize="1.5rem"
+          fontSize="2.1rem"
           fontWeight="700"
           textAlign={"center"}
           zIndex={1}
@@ -100,7 +100,7 @@ const Home = () => {
             textTransform: "none",
             padding: "16px",
             borderRadius: "24px",
-            margin: "12px 28px",
+            margin: "12px",
             boxShadow: "none",
           }}
         >
