@@ -12,6 +12,7 @@ const initialState = {
   turnover: null,
   businessGrowth: null,
   finePaid: null,
+  averageFinePaid: null,
   personalityInfo: null,
   sq: null,
   answered: 0,
@@ -82,22 +83,23 @@ const usersSlice = createSlice({
       state.personalityInfo = action.payload.personalityInfo ?? state.personalityInfo
       state.email = action.payload?.email ?? state.email;
       state.answered = action.payload?.answered ?? state.answered;
+      state.averageFinePaid = action.payload?.averageFinePaid ?? state.averageFinePaid;
       state.totalPlayers = action.payload?.totalPlayers ?? state.totalPlayers
       state.connectionRequested = action.payload?.connectionRequested ?? state.connectionRequested
     },
     resetState: (state) => {
-      state.user =null
-      state.session =null
-      state.name =null
-      state.company =null
-      state.sq =null
-      state.turnover =null
-      state.businessGrowth =null
-      state.finePaid =null
-      state.personalityInfo =null
-      state.email =null
-      state.answered =null
-      state.totalPlayers =null
+      state.user = null
+      state.session = null
+      state.name = null
+      state.company = null
+      state.sq = null
+      state.turnover = null
+      state.businessGrowth = null
+      state.finePaid = null
+      state.personalityInfo = null
+      state.email = null
+      state.answered = null
+      state.totalPlayers = null
       state.connectionRequested = null
       state.status = "idle"
     }

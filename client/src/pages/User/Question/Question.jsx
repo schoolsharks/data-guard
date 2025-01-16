@@ -177,19 +177,19 @@ const Question = () => {
                 />
                 <Stack
                   justifyContent={"center"}
-                  minHeight={"270px"}
+                  minHeight={"240px"}
                   margin="16px 4px"
                 >
                   <Typography
                     color={theme.palette.text.main}
-                    fontSize="1.3rem"
+                    fontSize="1.1rem"
                     fontWeight="700"
                   >
                     Make Your Choice <br/><br/>
                     {currentQuestion}
                   </Typography>
                 </Stack>
-                <Stack marginTop="16px" position="relative">
+                <Stack margin="16px 0" position="relative">
                   {options && (
                     <>
                       <OptionA

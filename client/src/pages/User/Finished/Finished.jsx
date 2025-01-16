@@ -19,9 +19,10 @@ import {
   setUser,
 } from "../../../app/userSlice";
 import homeIcon from "../../../assets/homeIcon.svg";
-import { Cached, Home, KeyboardArrowUp } from "@mui/icons-material";
+import { Cached, CheckBoxOutlined, Home, KeyboardArrowUp } from "@mui/icons-material";
 import MyButton from "../../../components/Button";
-import SemicircleProgress from "../../../components/SemicircleProgress";
+import useQnaResponses from "../../../hooks/useQnaResponses";
+import CircleProgress from "../../../components/CircleProgress";
 
 const questions = [
   {
@@ -97,6 +98,7 @@ const Finished = () => {
   const dispatch = useDispatch();
   const [connectionLoading, setConnectionLoading] = useState(false);
   const [inputMail, setInputMail] = useState("");
+  const { averageResponses, updateResponse } = useQnaResponses();
 
   const {
     user,
@@ -140,9 +142,9 @@ const Finished = () => {
         padding={"20px 16px"}
       >
         <Typography color={"#44799B"} fontSize={"1.25rem"}>
-          Active Players <b>{totalPlayers<1?1:totalPlayers}</b>
+          Active Players <b>{totalPlayers < 1 ? 1 : totalPlayers}</b>
         </Typography>
-        <Cached sx={{ color: "#44799B" }} />
+        {/* <Cached sx={{ color: "#44799B" }} /> */}
       </Stack>
       <Stack padding={"0 16px"}>
         <Typography
@@ -192,11 +194,11 @@ const Finished = () => {
           >
             Business Growth
           </Typography>
-          <Stack alignItems={"center"}>
-            <SemicircleProgress
+          <Stack alignItems={"center"} paddingBottom={"12px"}>
+            <CircleProgress
               value={Math.abs(((turnover - 500000) * 100) / 500000)}
               color={turnover >= 500000 ? "#22DD80" : "#DD2222"}
-              rightAmount={"₹"+turnover?.toFixed()}
+              rightAmount={"₹" + turnover?.toFixed()}
             />
           </Stack>
         </Box>
@@ -284,41 +286,78 @@ const Finished = () => {
             marginTop: "35px",
           }}
         >
-          {questions.map((item, index) => (
-            <Box
-              key={index}
-              border="1px solid #ffffff"
-              borderRadius={"10px"}
-              padding={"15px"}
-              marginTop={"22px"}
-            >
-              <Typography color={"#fff"}>{item.question}</Typography>
-              <Stack direction={"row"} marginTop={"24px"} gap={"4px"}>
-                {["Yes", "No"].map((val, index) => (
-                  <Button
-                    key={index}
-                    variant="contained"
-                    sx={{
-                      color: theme.palette.text.main,
-                      flex: "1",
-                      fontSize: "1.25rem",
-                      fontWeight: "600",
-                      bgcolor: "#FFFFFFB2",
-                      "&:hover": {
-                        bgcolor: "#FFFFFFB2",
-                      },
-                    }}
+          {questions.map((item, qindex) => {
+            const percentageYes = averageResponses?.find(
+              (item) => item.quesId === qindex + 1
+            )?.percentageYes;
+            if (percentageYes) {
+              return (
+                <Stack
+                  border={"1px solid #ffffff"}
+                  borderRadius={"10px"}
+                  padding={"12px"}
+                  marginTop={"20px"}
+                  color={"#fff"}
+                >
+                  <Typography>{item.question}</Typography>
+                  <Box
+                    height="10px"
+                    width={"100%"}
+                    bgcolor={"#ffffff"}
+                    borderRadius={"10px"}
+                    overflow={"hidden"}
+                    marginTop={"24px"}
                   >
-                    {val}
-                  </Button>
-                ))}
-              </Stack>
-            </Box>
-          ))}
+                    <Box
+                      height={"100%"}
+                      borderRadius={"10px"}
+                      width={`${percentageYes}%`}
+                      bgcolor={"#75B8E3"}
+                    />
+                  </Box>
+                  <Typography marginTop={"12px"} fontWeight={"600"}>
+                    Opt-{percentageYes}%
+                  </Typography>
+                </Stack>
+              );
+            } else
+              return (
+                <Box
+                  key={qindex}
+                  border="1px solid #ffffff"
+                  borderRadius={"10px"}
+                  padding={"15px"}
+                  marginTop={"22px"}
+                >
+                  <Typography color={"#fff"}>{item.question}</Typography>
+                  <Stack direction={"row"} marginTop={"24px"} gap={"4px"}>
+                    {["YES", "NO"].map((val, index) => (
+                      <Button
+                        key={index}
+                        variant="contained"
+                        onClick={() => updateResponse(qindex + 1, val)}
+                        sx={{
+                          color: theme.palette.text.main,
+                          flex: "1",
+                          fontSize: "1.25rem",
+                          fontWeight: "600",
+                          bgcolor: "#FFFFFFB2",
+                          "&:hover": {
+                            bgcolor: "#FFFFFFB2",
+                          },
+                        }}
+                      >
+                        {val}
+                      </Button>
+                    ))}
+                  </Stack>
+                </Box>
+              );
+          })}
           {/* Connect Part */}
           <Stack color={"#fff"} marginTop={"40px"}>
             <Typography fontSize="1.5rem" fontWeight="700" margin="20px 0 12px">
-              Looking for a workshop or one to one consulting
+              Looking for a workshop or one to one consulting with A&P Partners
             </Typography>
             {connectionLoading ? (
               <CircularProgress sx={{ color: "#fff", margin: "8px 0" }} />
@@ -363,22 +402,25 @@ const Finished = () => {
         <Box
           sx={{ border: `1px solid ${theme.palette.text.main}` }}
           color={theme.palette.text.main}
-          padding={"16px 16px 16px 24px"}
+          padding={"16px"}
           marginTop="35px"
           borderRadius={"15px"}
         >
-          <ul>
+          <Stack gap={"12px"}>
             {keyNotes.map((item, index) => (
-              <Typography
-                key={index}
-                component={"li"}
-                fontWeight={"600"}
-                fontSize={"15px"}
-              >
-                <b>{item.title}:</b> {item.description}
-              </Typography>
+              <Stack direction={"row"} gap={"8px"}>
+                <CheckBoxOutlined sx={{fontSize:"22px",marginTop:"2px"
+                }}/>
+                <Typography
+                  key={index}
+                  fontWeight={"600"}
+                  fontSize={"15px"}
+                >
+                  <b>{item.title}:</b> {item.description}
+                </Typography>
+              </Stack>
             ))}
-          </ul>
+          </Stack>
         </Box>
       </Stack>
 

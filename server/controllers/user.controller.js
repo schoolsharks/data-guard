@@ -85,6 +85,9 @@ export const handleGetUser = async (req, res) => {
    
     const isCompleted=userData.responses?.length===questions.length
 
+    if(isCompleted){
+      
+    }
     res.status(200).json({
       success: true,
       user: userData._id,

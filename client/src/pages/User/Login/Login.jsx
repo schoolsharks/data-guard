@@ -78,16 +78,16 @@ const Login = () => {
     <Stack
       className="user-login"
       width="100%"
-      // height={`${window.innerHeight < 616 ? 616 : window.innerHeight}px`}
+      height={`${window.innerHeight < 616 ? 616 : window.innerHeight}px`}
       position="relative"
       alignItems={"center"}
     >
+      <Stack flex="1" width={"100%"} alignItems={"center"} justifyContent={"center"}>
       <Stack>
         <Typography
           variant="h5"
           fontWeight={"500"}
           fontSize="2.5rem"
-          margin={"120px 0 0"}
           color={theme.palette.text.main}
         >
           LOGIN
@@ -167,10 +167,11 @@ const Login = () => {
           {error}
         </Typography>
       </Stack>
+      </Stack>
       <Stack
         gap={"8px"}
         sx={{
-          margin: "auto 0 150px",
+          margin: "auto 0 0",
           width: "80%",
           maxWidth: "430px",
           color: theme.palette.text.main,

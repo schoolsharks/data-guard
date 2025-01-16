@@ -4,6 +4,8 @@ import background from "../../../assets/home-page-bg.webp";
 import { useNavigate } from "react-router-dom";
 import wgabLogo from "../../../assets/wgab-logo.webp";
 import anpPartnersLogo from "../../../assets/anp-partners-logo.webp";
+import riskItLogo from "../../../assets/risk-it-logo.webp";
+import { CheckBoxOutlined } from "@mui/icons-material";
 
 const Home = () => {
   const theme = useTheme();
@@ -14,7 +16,7 @@ const Home = () => {
   return (
     <Stack
       width="100%"
-      // height={`${window.innerHeight < 616 ? 616 : window.innerHeight}px`}
+      height={`${window.innerHeight < 616 ? 616 : window.innerHeight}px`}
     >
       <Stack
         direction={"row"}
@@ -24,22 +26,24 @@ const Home = () => {
         <img src={anpPartnersLogo} alt="WGAB" style={{ width: "50px" }} />
         <img src={wgabLogo} alt="A&P Partners" style={{ width: "70px" }} />
       </Stack>
-      <Typography
-        variant={"h3"}
-        fontSize="2.8rem"
-        fontWeight="700"
-        textAlign={"center"}
-        zIndex={1}
-        maxWidth={"200px"}
-        color={theme.palette.text.main}
-        margin={"32px auto 22px"}
-        sx={{
-          minWidth: "max-content",
-          textShadow: "2px 2px 4px #fff",
-        }}
-      >
-        Risk It or Fix It
-      </Typography>
+
+      <Stack alignItems={"center"} margin={"12px auto 12px"}>
+        <img src={riskItLogo} alt="" style={{ width: "90px" }} />
+        <Typography
+          fontSize="1.5rem"
+          fontWeight="700"
+          textAlign={"center"}
+          zIndex={1}
+          maxWidth={"200px"}
+          color={theme.palette.text.main}
+          sx={{
+            minWidth: "max-content",
+            textShadow: "2px 2px 4px #fff",
+          }}
+        >
+          Risk It or Fix It
+        </Typography>
+      </Stack>
       <Stack
         color={theme.palette.text.main}
         gap={"16px"}
@@ -51,12 +55,7 @@ const Home = () => {
           background: "linear-gradient(180deg, #FFFFFF 0%, #A1C1D8 100%)",
         }}
       >
-        <Typography
-          variant="body2"
-          fontWeight={"600"}
-          fontSize={"1.25rem"}
-          margin={"0 0 12px"}
-        >
+        <Typography variant="body2" fontWeight={"600"} margin={"0 0 12px"}>
           Welcome to <b>FinPeak!</b>
           <br />
           Congratulations! You’ve just been appointed CEO for a day at FinPeak,
@@ -66,20 +65,26 @@ const Home = () => {
           Starting with a budget of <b>₹500,000</b>, you’ll face a series of
           critical decisions. Each choice will test your ability to:
           <br />
-          1. Balance profits with ethics.
+          <Stack direction={"row"} gap={"4px"} alignItems={"center"}>
+            <CheckBoxOutlined style={{fontSize:"16px"}}/>
+            <Typography>Balance profits with ethics.</Typography>
+          </Stack>
+          <Stack direction={"row"} gap={"4px"} alignItems={"center"}>
+            <CheckBoxOutlined style={{fontSize:"16px"}}/>
+            <Typography>Avoid regulatory pitfalls.</Typography>
+          </Stack>
+          <Stack direction={"row"} gap={"4px"} alignItems={"center"}>
+            <CheckBoxOutlined style={{fontSize:"16px"}}/>
+            <Typography>Every choice matters.</Typography>
+          </Stack>
           <br />
-          2. Avoid regulatory pitfalls.
-          <br />
-          3. Build long-term user loyalty.
-          <br />
-          <br />
-          Every choice matters.<br/>
-          You’ll have just <b>30 seconds</b> to make each
-          decision.
+          You’ll have just <b>30 seconds</b> to make each decision.
         </Typography>
-        <Typography color={"#44799BA1"} fontSize={"14px"}>Game Inspired by: Digital Personal Data Protection Act, 2023.</Typography>
+        <Typography color={"#44799BA1"} fontSize={"14px"}>
+          Game Inspired by: Digital Personal Data Protection Act, 2023.
+        </Typography>
       </Stack>
-      <Stack width={"100%"} maxWidth={"900px"}>
+      <Stack width={"100%"} maxWidth={"900px"} marginTop={"auto"}>
         <Button
           onClick={handleGetStarted}
           variant="contained"
