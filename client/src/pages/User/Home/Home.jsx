@@ -28,13 +28,13 @@ const Home = () => {
       <Stack
         direction={"row"}
         justifyContent={"space-between"}
-        padding={"16px 12px"}
+        padding={"16px 12px 0"}
       >
         <img src={anpPartnersLogo} alt="WGAB" style={{ width: "50px" }} />
         <img src={wgabLogo} alt="A&P Partners" style={{ width: "70px" }} />
       </Stack>
 
-      <Stack alignItems={"center"} margin={"12px auto 12px"}>
+      <Stack alignItems={"center"} margin={"0 auto 12px"}>
         <img src={riskItLogo} alt="" style={{ width: "90px" }} />
         <Typography
           fontSize="1.5rem"
