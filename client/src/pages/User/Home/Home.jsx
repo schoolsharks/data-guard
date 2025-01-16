@@ -17,6 +17,13 @@ const Home = () => {
     <Stack
       width="100%"
       height={`${window.innerHeight < 616 ? 616 : window.innerHeight}px`}
+      sx={{
+        overflowY: "scroll",
+        "&::-webkit-scrollbar": {
+          display: "none",
+        },
+        scrollbarWidth: "none",
+      }}
     >
       <Stack
         direction={"row"}
@@ -66,15 +73,15 @@ const Home = () => {
           critical decisions. Each choice will test your ability to:
           <br />
           <Stack direction={"row"} gap={"4px"} alignItems={"center"}>
-            <CheckBoxOutlined style={{fontSize:"16px"}}/>
+            <CheckBoxOutlined style={{ fontSize: "16px" }} />
             <Typography>Balance profits with ethics.</Typography>
           </Stack>
           <Stack direction={"row"} gap={"4px"} alignItems={"center"}>
-            <CheckBoxOutlined style={{fontSize:"16px"}}/>
+            <CheckBoxOutlined style={{ fontSize: "16px" }} />
             <Typography>Avoid regulatory pitfalls.</Typography>
           </Stack>
           <Stack direction={"row"} gap={"4px"} alignItems={"center"}>
-            <CheckBoxOutlined style={{fontSize:"16px"}}/>
+            <CheckBoxOutlined style={{ fontSize: "16px" }} />
             <Typography>Every choice matters.</Typography>
           </Stack>
           <br />
