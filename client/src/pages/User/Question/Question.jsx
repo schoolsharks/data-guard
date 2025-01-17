@@ -129,15 +129,15 @@ const Question = () => {
                 >
                   <Stack>
                     <Typography
-                      fontSize={"1.5rem"}
-                      lineHeight={"1.5rem"}
+                      fontSize={"1.25rem"}
+                      lineHeight={"1.25rem"}
                       fontWeight={"700"}
                     >
                       PAT
                     </Typography>
                     <Typography>(TURNOVER)</Typography>
                   </Stack>
-                  <Typography fontSize={"1.5rem"} fontWeight={"700"}>
+                  <Typography fontSize={"1.25rem"} fontWeight={"700"}>
                     ₹{turnover.toFixed()}
                   </Typography>
 
@@ -166,7 +166,7 @@ const Question = () => {
                   variant="determinate"
                   value={(answered * 100) / 25}
                   sx={{
-                    margin: "16px 0 8px",
+                    margin: "8px 0 8px",
                     borderRadius: "2px",
                     "& .MuiLinearProgress-bar": {
                       backgroundColor: theme.palette.text.main,
