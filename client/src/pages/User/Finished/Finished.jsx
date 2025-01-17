@@ -28,6 +28,7 @@ import {
 import MyButton from "../../../components/Button";
 import useQnaResponses from "../../../hooks/useQnaResponses";
 import CircleProgress from "../../../components/CircleProgress";
+import { formatAmount } from "../../../utils/formatAmount";
 
 const questions = [
   {
@@ -236,7 +237,7 @@ const Finished = () => {
                 Paid by You
               </Typography>
               <Typography fontSize={"1.25rem"} fontWeight={"600"}>
-                ₹{Math.abs(finePaid).toFixed()}
+                {formatAmount(Math.abs(finePaid)).split(".")[0]}
               </Typography>
             </Stack>
           </Box>

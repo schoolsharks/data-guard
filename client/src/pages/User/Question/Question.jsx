@@ -17,6 +17,7 @@ import Button from "../../../components/Button";
 import homeIcon from "../../../assets/homeIcon.svg";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Home } from "@mui/icons-material";
+import { formatAmount } from "../../../utils/formatAmount";
 
 const questionVariants = {
   initial: { opacity: 0, x: "100vw" },
@@ -138,7 +139,7 @@ const Question = () => {
                     <Typography>(TURNOVER)</Typography>
                   </Stack>
                   <Typography fontSize={"1.25rem"} fontWeight={"700"}>
-                    ₹{turnover.toFixed()}
+                    {turnover && formatAmount(turnover)?.split(".")[0]}
                   </Typography>
 
                   {/* <Stack alignItems="center" flex={1}>
