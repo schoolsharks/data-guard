@@ -122,14 +122,14 @@ const Question = () => {
               >
                 <Stack
                   direction="row"
-                  marginTop="60px"
+                  marginTop="30px"
                   justifyContent="space-between"
                   alignItems={"center"}
                   color={theme.palette.text.main}
                 >
                   <Stack>
                     <Typography
-                      fontSize={"1.9rem"}
+                      fontSize={"1.5rem"}
                       lineHeight={"1.5rem"}
                       fontWeight={"700"}
                     >
@@ -137,7 +137,7 @@ const Question = () => {
                     </Typography>
                     <Typography>(TURNOVER)</Typography>
                   </Stack>
-                  <Typography fontSize={"1.9rem"} fontWeight={"700"}>
+                  <Typography fontSize={"1.5rem"} fontWeight={"700"}>
                     ₹{turnover.toFixed()}
                   </Typography>
 

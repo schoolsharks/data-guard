@@ -19,7 +19,12 @@ import {
   setUser,
 } from "../../../app/userSlice";
 import homeIcon from "../../../assets/homeIcon.svg";
-import { Cached, CheckBoxOutlined, Home, KeyboardArrowUp } from "@mui/icons-material";
+import {
+  Cached,
+  CheckBoxOutlined,
+  Home,
+  KeyboardArrowUp,
+} from "@mui/icons-material";
 import MyButton from "../../../components/Button";
 import useQnaResponses from "../../../hooks/useQnaResponses";
 import CircleProgress from "../../../components/CircleProgress";
@@ -49,7 +54,7 @@ const questions = [
 
 const keyNotes = [
   {
-    title: "Key Takeaway",
+    title: null,
     description:
       "Safeguarding personal data is both a right and a responsibility—ensure compliance and stay informed!",
   },
@@ -196,9 +201,9 @@ const Finished = () => {
           </Typography>
           <Stack alignItems={"center"} paddingBottom={"12px"}>
             <CircleProgress
-              value={Math.abs(((turnover - 500000) * 100) / 500000)}
+              value={((turnover - 500000) * 100) / 500000}
               color={turnover >= 500000 ? "#22DD80" : "#DD2222"}
-              rightAmount={"₹" + turnover?.toFixed()}
+              rightAmount={turnover?.toFixed()}
             />
           </Stack>
         </Box>
@@ -248,7 +253,7 @@ const Finished = () => {
               justifyContent={"space-between"}
             >
               <Typography fontSize={"1.25rem"} fontWeight={"600"}>
-                All Players Average
+                Players Average
               </Typography>
               <Typography fontSize={"1.25rem"} fontWeight={"600"}>
                 ₹20,000
@@ -258,7 +263,7 @@ const Finished = () => {
         </Box>
 
         {/* Calculation Summary */}
-        <Box
+        {/* <Box
           border={`1px solid ${theme.palette.text.main}`}
           marginTop={"35px"}
           borderRadius={"16px"}
@@ -275,7 +280,7 @@ const Finished = () => {
             calculations are for gameplay only and do not reflect real-world
             scenarios.
           </Typography>
-        </Box>
+        </Box> */}
 
         {/* Yes-No Section */}
         <Box
@@ -407,16 +412,14 @@ const Finished = () => {
           borderRadius={"15px"}
         >
           <Stack gap={"12px"}>
+            <Typography fontSize={"1.25rem"} fontWeight={"900"}>
+              Key Takeaways
+            </Typography>
             {keyNotes.map((item, index) => (
               <Stack direction={"row"} gap={"8px"}>
-                <CheckBoxOutlined sx={{fontSize:"22px",marginTop:"2px"
-                }}/>
-                <Typography
-                  key={index}
-                  fontWeight={"600"}
-                  fontSize={"15px"}
-                >
-                  <b>{item.title}:</b> {item.description}
+                <CheckBoxOutlined sx={{ fontSize: "22px", marginTop: "2px" }} />
+                <Typography key={index} fontWeight={"600"} fontSize={"15px"}>
+                  <b>{item.title && item.title + " :"}</b> {item.description}
                 </Typography>
               </Stack>
             ))}

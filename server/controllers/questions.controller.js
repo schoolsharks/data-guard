@@ -103,11 +103,12 @@ const updateUserResponses = async (userId, quesId, response) => {
       userDoc.businessGrowth += (option.businessGrowth * userDoc.turnover)
       userDoc.finePaid += (option.fine * userDoc.turnover)
       userDoc.longTermImpact += (option.longTermImpact * userDoc.turnover)
+
       userDoc.turnover += (option.netImpact * userDoc.turnover)
+      userDoc.answered_count+=1
       
       const totalResponseTime = (Date.now() - userDoc.createdAt) / 1000;
       userDoc.avgResponseTime = totalResponseTime / userDoc.answered_count;
-      userDoc.answered_count+=1
       
       userDoc.version += 1;
 
