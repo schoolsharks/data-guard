@@ -104,13 +104,30 @@ const updateUserResponses = async (userId, quesId, response) => {
       userDoc.finePaid += (option.fine * userDoc.turnover)
       userDoc.longTermImpact += (option.longTermImpact * userDoc.turnover)
 
+
+      
+      await Session.findByIdAndUpdate(
+        userDoc.session,
+        {
+          $inc: {
+            finePaid:option.fine * userDoc.turnover
+          },
+        },
+        { new: true }
+      );
+
+
+      
       userDoc.turnover += (option.netImpact * userDoc.turnover)
       userDoc.answered_count+=1
       
       const totalResponseTime = (Date.now() - userDoc.createdAt) / 1000;
       userDoc.avgResponseTime = totalResponseTime / userDoc.answered_count;
       
+
       userDoc.version += 1;
+
+      
 
       await userDoc.save({ session });
       await session.commitTransaction();

@@ -22,13 +22,14 @@ export const initializeAuth = async (navigate, dispatch) => {
         if (response.data.success === false) {
             navigate("/login");
         } else {
-            const { user, name, email, company, session, sq, turnover, businessGrowth, finePaid, personalityInfo, answered, connected, } = response.data;
+            const { user, name, email, company, session, sq, turnover, businessGrowth, finePaid,finePaidByGroup, personalityInfo, answered, connected, } = response.data;
             dispatch(setUser({
                 user,
                 name,
                 email, 
                 company, 
                 session, 
+                finePaidByGroup,
                 sq, 
                 turnover, 
                 businessGrowth, 

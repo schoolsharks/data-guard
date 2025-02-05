@@ -8,9 +8,9 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
-import OurButton from "../../../components/Button";
+// import OurButton from "../../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
-import TotalPlayers from "../../../components/TotalPlayers";
+// import TotalPlayers from "../../../components/TotalPlayers";
 import { useNavigate } from "react-router-dom";
 import "./Finished.css";
 import {
@@ -20,15 +20,16 @@ import {
 } from "../../../app/userSlice";
 import homeIcon from "../../../assets/homeIcon.svg";
 import {
-  Cached,
+  // Cached,
   CheckBoxOutlined,
   Home,
-  KeyboardArrowUp,
+  // KeyboardArrowUp,
 } from "@mui/icons-material";
 import MyButton from "../../../components/Button";
 import useQnaResponses from "../../../hooks/useQnaResponses";
 import CircleProgress from "../../../components/CircleProgress";
 import { formatAmount } from "../../../utils/formatAmount";
+import { motion } from "framer-motion";
 
 const questions = [
   {
@@ -112,8 +113,9 @@ const Finished = () => {
     company,
     turnover,
     personalityInfo,
-    businessGrowth,
+    // businessGrowth,
     finePaid,
+    finePaidByGroup,
     totalPlayers,
     connectionRequested,
   } = useSelector((state) => state.user);
@@ -221,46 +223,18 @@ const Finished = () => {
           <Typography fontSize={"30px"} fontWeight={"700"}>
             Fines
           </Typography>
-          <Box marginTop={"47px"}>
-            <Box
-              borderRadius={"0px 15px 15px 0px"}
-              bgcolor={"#75B8E3"}
-              height={"30px"}
-              width={`${(Math.abs(finePaid) * 100) / 500000}%`}
-            />
-            <Stack
-              marginTop={"12px"}
-              direction={"row"}
-              justifyContent={"space-between"}
-            >
-              <Typography fontSize={"1.25rem"} fontWeight={"600"}>
-                Paid by You
-              </Typography>
-              <Typography fontSize={"1.25rem"} fontWeight={"600"}>
-                {formatAmount(Math.abs(finePaid)).split(".")[0]}
-              </Typography>
-            </Stack>
-          </Box>
-          <Box marginTop={"47px"}>
-            <Box
-              borderRadius={"0px 15px 15px 0px"}
-              bgcolor={"#75B8E3"}
-              height={"30px"}
-              width={"22%"}
-            />
-            <Stack
-              marginTop={"12px"}
-              direction={"row"}
-              justifyContent={"space-between"}
-            >
-              <Typography fontSize={"1.25rem"} fontWeight={"600"}>
-                Players Average
-              </Typography>
-              <Typography fontSize={"1.25rem"} fontWeight={"600"}>
-                ₹20,000
-              </Typography>
-            </Stack>
-          </Box>
+          <Stack marginTop={"28px"} alignItems={"center"} borderRadius={"8px"} direction={"row"} border={"2px solid #01416A"} justifyContent={"space-between"}>
+            <Typography margin={"18px 0 18px 12px"} fontSize="18px" color={"#00416A"}>Paid by You</Typography>
+            <Box bgcolor={"#034670"} width={"120px"}>
+              <Typography color={"#fff"} margin={"18px 12px"} fontSize={"20px"} fontWeight={"600"}>{formatAmount(Math.abs(finePaid)).split(".")[0]}</Typography>
+            </Box>
+          </Stack>
+          <Stack marginTop={"20px"} alignItems={"center"} borderRadius={"8px"} direction={"row"} border={"2px solid #01416A"} justifyContent={"space-between"}>
+            <Typography margin={"18px 0 18px 12px"} fontSize="18px" color={"#00416A"}>All Players Average</Typography>
+            <Box bgcolor={"#034670"} width={"120px"}>
+              <Typography color={"#fff"} margin={"18px 12px"} fontSize={"20px"} fontWeight={"600"}>{formatAmount(Math.abs(finePaidByGroup)).split(".")[0]}</Typography>
+            </Box>
+          </Stack>
         </Box>
 
         {/* Calculation Summary */}
@@ -314,11 +288,16 @@ const Finished = () => {
                     overflow={"hidden"}
                     marginTop={"24px"}
                   >
-                    <Box
-                      height={"100%"}
-                      borderRadius={"10px"}
-                      width={`${percentageYes}%`}
-                      bgcolor={"#75B8E3"}
+                    <motion.div
+                      initial={{width:"0"}}
+                      animate={{width:`${percentageYes}%`}}
+                      transition={{duration:0.3,ease:"easeOut",delay:0.5}}
+
+                      style={{
+                        height: "100%",
+                        borderRadius: "10px",
+                        backgroundColor: "#75B8E3",
+                      }}
                     />
                   </Box>
                   <Typography marginTop={"12px"} fontWeight={"600"}>

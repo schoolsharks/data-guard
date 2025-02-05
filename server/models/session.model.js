@@ -8,7 +8,10 @@ const sessionSchema = new mongoose.Schema({
     end_time: {
         type: Date
     },
-
+    finePaid:{
+        type:Number,
+        default:0
+    },
     leaderboard: [{
         name: String,
         wealth: Number,

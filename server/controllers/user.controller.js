@@ -69,7 +69,7 @@ export const handleGetUser = async (req, res) => {
     const [userData, admin, session] = await Promise.all([
       User.findById(userId),
       Admin.findOne(),
-      User.findById(userId).then(user => user?.session ? Session.findById(user.session).select("totalPlayers") : null)
+      User.findById(userId).then(user => user?.session ? Session.findById(user.session).select("totalPlayers finePaid") : null)
     ]);
 
     if (!userData) {
@@ -99,6 +99,7 @@ export const handleGetUser = async (req, res) => {
       turnover:isCompleted ? userData.turnover + userData.longTermImpact : userData.turnover,
       businessGrowth:isCompleted?userData.businessGrowth:undefined,
       finePaid:isCompleted?userData.finePaid:undefined,
+      finePaidByGroup:isCompleted?(session.finePaid/session.totalPlayers):undefined,
       personalityInfo:isCompleted?getPersonalityInfo(userData.businessGrowth,userData.finePaid):undefined,
       answered: userData.answered_count,
       connected:userData.connected

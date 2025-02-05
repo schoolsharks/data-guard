@@ -12,6 +12,7 @@ const initialState = {
   turnover: null,
   businessGrowth: null,
   finePaid: null,
+  finePaidByGroup:null,
   averageFinePaid: null,
   personalityInfo: null,
   sq: null,
@@ -71,7 +72,6 @@ const usersSlice = createSlice({
       state.error = action.payload;
     },
     setUser: (state, action) => {
-
       state.user = action.payload?.user ?? state.user;
       state.session = action.payload?.session ?? state.session;
       state.name = action.payload?.name ?? state.name;
@@ -80,6 +80,7 @@ const usersSlice = createSlice({
       state.turnover = action.payload.turnover ?? state.turnover
       state.businessGrowth = action.payload.businessGrowth ?? state.businessGrowth
       state.finePaid = action.payload.finePaid ?? state.finePaid
+      state.finePaidByGroup = action.payload.finePaidByGroup ?? state.finePaidByGroup
       state.personalityInfo = action.payload.personalityInfo ?? state.personalityInfo
       state.email = action.payload?.email ?? state.email;
       state.answered = action.payload?.answered ?? state.answered;
