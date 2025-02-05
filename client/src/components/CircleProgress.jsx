@@ -112,8 +112,8 @@ const CircleProgress = ({ value, color, rightAmount }) => {
         <div style={styles.amount}>PAT</div>
       </div>
       <div style={styles.amountContainer}>
-        <div style={styles.amount}>{rightAmount ? formatAmount(rightAmount) : 0}</div>
         <div style={styles.amount}>₹5,00,000</div>
+        <div style={styles.amount}>{rightAmount ? formatAmount(rightAmount) : 0}</div>
       </div>
     </div>
   );

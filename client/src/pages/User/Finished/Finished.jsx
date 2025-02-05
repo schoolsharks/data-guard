@@ -191,7 +191,7 @@ const Finished = () => {
         <Box
           marginTop={"35px"}
           borderRadius={"20px"}
-          border={`3px solid ${theme.palette.text.main}`}
+          border={`3px solid #136FA9`}
           padding={"20px 16px"}
           bgcolor={"#fff"}
         >
@@ -215,7 +215,7 @@ const Finished = () => {
         <Box
           marginTop={"35px"}
           borderRadius={"20px"}
-          border={`3px solid ${theme.palette.text.main}`}
+          border={`3px solid #136FA9`}
           padding={"20px 16px"}
           color={theme.palette.text.main}
           bgcolor={"#fff"}
@@ -223,16 +223,68 @@ const Finished = () => {
           <Typography fontSize={"30px"} fontWeight={"700"}>
             Fines
           </Typography>
-          <Stack marginTop={"28px"} alignItems={"center"} borderRadius={"8px"} direction={"row"} border={"2px solid #01416A"} justifyContent={"space-between"}>
-            <Typography margin={"18px 0 18px 12px"} fontSize="18px" color={"#00416A"}>Paid by You</Typography>
-            <Box bgcolor={"#034670"} width={"120px"}>
-              <Typography color={"#fff"} margin={"18px 12px"} fontSize={"20px"} fontWeight={"600"}>{formatAmount(Math.abs(finePaid)).split(".")[0]}</Typography>
+          <Stack
+            marginTop={"28px"}
+            alignItems={"center"}
+            borderRadius={"8px"}
+            direction={"row"}
+            border={"2px solid #136FA9"}
+            overflow={"hidden"}
+            justifyContent={"space-between"}
+          >
+            <Typography
+              margin={"18px 0 18px 12px"}
+              fontSize="18px"
+              color={"#00416A"}
+            >
+              Paid by You
+            </Typography>
+            <Box
+              sx={{
+                background: "linear-gradient(270deg, #034670 0%, #0686D6 100%)",
+              }}
+              width={"120px"}
+            >
+              <Typography
+                color={"#fff"}
+                margin={"18px 12px"}
+                fontSize={"20px"}
+                fontWeight={"600"}
+              >
+                {formatAmount(Math.abs(finePaid)).split(".")[0]}
+              </Typography>
             </Box>
           </Stack>
-          <Stack marginTop={"20px"} alignItems={"center"} borderRadius={"8px"} direction={"row"} border={"2px solid #01416A"} justifyContent={"space-between"}>
-            <Typography margin={"18px 0 18px 12px"} fontSize="18px" color={"#00416A"}>All Players Average</Typography>
-            <Box bgcolor={"#034670"} width={"120px"}>
-              <Typography color={"#fff"} margin={"18px 12px"} fontSize={"20px"} fontWeight={"600"}>{formatAmount(Math.abs(finePaidByGroup)).split(".")[0]}</Typography>
+          <Stack
+            marginTop={"20px"}
+            alignItems={"center"}
+            borderRadius={"8px"}
+            direction={"row"}
+            border={"2px solid #136FA9"}
+            overflow={"hidden"}
+            justifyContent={"space-between"}
+          >
+            <Typography
+              margin={"18px 0 18px 12px"}
+              fontSize="18px"
+              color={"#00416A"}
+            >
+              All Players Average
+            </Typography>
+            <Box
+              sx={{
+                background: "linear-gradient(270deg, #034670 0%, #0686D6 100%)",
+              }}
+              width={"120px"}
+            >
+              <Typography
+                color={"#fff"}
+                margin={"18px 12px"}
+                fontSize={"20px"}
+                fontWeight={"600"}
+              >
+                {formatAmount(Math.abs(finePaidByGroup)).split(".")[0]}
+              </Typography>
             </Box>
           </Stack>
         </Box>
@@ -289,10 +341,13 @@ const Finished = () => {
                     marginTop={"24px"}
                   >
                     <motion.div
-                      initial={{width:"0"}}
-                      animate={{width:`${percentageYes}%`}}
-                      transition={{duration:0.3,ease:"easeOut",delay:0.5}}
-
+                      initial={{ width: "0" }}
+                      animate={{ width: `${percentageYes}%` }}
+                      transition={{
+                        duration: 0.3,
+                        ease: "easeOut",
+                        delay: 0.5,
+                      }}
                       style={{
                         height: "100%",
                         borderRadius: "10px",
