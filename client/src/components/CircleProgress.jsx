@@ -7,18 +7,19 @@ const CircleProgress = ({ value, color, rightAmount }) => {
   // Constants for SVG
   const size = 250;
   const strokeWidth = 15;
+  const dotSize = 24;
   const center = size / 2;
   const radius = center - strokeWidth;
   const circumference = 2 * Math.PI * radius;
   
-  // Calculate the progress
-  const normalizedValue = Math.min(Math.max(value, -100), 100); // Clamp between -100 and 100
+  const normalizedValue = Math.min(Math.max(value, -100), 100); 
   const offset = circumference - (Math.abs(normalizedValue) / 100) * circumference;
   
-  // For negative values, we want to start from top and go counterclockwise
-  // We achieve this by:
-  // 1. Always rotating -90 degrees to start from top
-  // 2. Using transform-origin and scale to flip the circle for negative values
+  // Calculate dot position
+  const angle = ((Math.abs(normalizedValue) / 100) * 360 ) * (Math.PI / 180);
+  const dotX = center + radius * Math.cos(angle);
+  const dotY = center + radius * Math.sin(angle);
+  
   const styles = {
     container: {
       position: 'relative',
@@ -43,6 +44,12 @@ const CircleProgress = ({ value, color, rightAmount }) => {
       strokeDasharray: circumference,
       strokeDashoffset: offset,
       transition: 'stroke-dashoffset 0.5s ease',
+    },
+    dot: {
+      fill: value >= 0 ? '#22DD80' : '#DD2222', 
+      transition: 'all 0.5s ease',
+      stroke:value >= 0 ? '#39B421' : '#B42121',
+      strokeWidth:"3px"
     },
     label: {
       position: 'absolute',
@@ -92,13 +99,20 @@ const CircleProgress = ({ value, color, rightAmount }) => {
           r={radius}
           style={styles.progress}
         />
+        {/* End dot */}
+        <circle
+          cx={dotX}
+          cy={dotY}
+          r={dotSize / 2}
+          style={styles.dot}
+        />
       </svg>
       <div style={styles.label}>
         <div style={styles.percentage}>{value.toFixed()}%</div>
         <div style={styles.amount}>PAT</div>
       </div>
       <div style={styles.amountContainer}>
-        <div style={styles.amount}>{rightAmount ?formatAmount(rightAmount):0}</div>
+        <div style={styles.amount}>{rightAmount ? formatAmount(rightAmount) : 0}</div>
         <div style={styles.amount}>₹5,00,000</div>
       </div>
     </div>
